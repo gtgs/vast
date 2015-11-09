@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2012 Google Inc. All Rights Reserved.
+  You may study, modify, and use this example for any purpose.
+  Note that this example is provided "as is", WITHOUT WARRANTY
+  of any kind either expressed or implied.
+ -->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        xmlns:mx="library://ns.adobe.com/flex/halo"
+        applicationComplete="applicationCompleteHandler()">
+
+  <fx:Script>
+    <![CDATA[
+      import com.google.ads.ima.examples.sdk_integration.web.SdkIntegrationExample;
+
+      private var sdkIntegration:SdkIntegrationExample;
+
+      public function applicationCompleteHandler():void {
+        Security.allowDomain("*");
+        sdkIntegration = new SdkIntegrationExample(videoPlayer);
+		sampleAdTag.text = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x360&iu=/6062/iab_vast_samples/skippable&ciu_szs=300x250,728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]";
+      }
+    ]]>
+  </fx:Script>
+
+  <s:Panel title="Sample VAST Player using Google IMA SDK">
+    <s:VGroup>
+		<s:Label fontSize="14" fontWeight="bold" paddingTop="5" paddingLeft="10">
+			<s:text>VAST Ad Tag URL </s:text>
+        </s:Label>
+		<s:HGroup  paddingLeft="10">
+			<s:TextInput id="sampleAdTag" width="400" text="" />
+			<s:Button
+				id="requestAd"
+				label="Request Ad"
+				width="150"
+				click="sdkIntegration.requestAdsButtonHandler(event, sampleAdTag.text)"/>
+		</s:HGroup>
+	  
+		<s:VideoPlayer
+            id="videoPlayer"
+            autoPlay="false"
+            width="640"
+            height="360"/>
+    </s:VGroup>
+  </s:Panel>
+</s:Application>
